@@ -6,22 +6,22 @@ import {
   compareAsc,
   differenceInDays,
 } from 'date-fns';
+import printTask from './functions/domcontroller.js';
+import NewTask from './functions/newtask.js';
 
-const fechaActual = new Date();
-console.log('Fecha actual:', fechaActual);
+const newTask = document.getElementById('new-task');
+newTask.addEventListener('click', () => {
+  NewTask();
+});
 
-// Formatear la fecha actual
-const fechaFormateada = format(fechaActual, 'yyyy-MM-dd');
-console.log('Fecha formateada:', fechaFormateada);
-
-class ToDo {
-  constructor(task, dueDate, priority, state) {
-    this.task = task;
-    this.dueDate = dueDate;
-    this.priority = priority;
-    this.state = state;
-  }
+function loadTasksFromLocalStorage() {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  tasks.forEach((task) => {
+    printTask(task.task, task.dueDate, task.priority, task.state);
+  });
 }
+
+loadTasksFromLocalStorage();
 
 class Note {
   constructor(title, description) {
