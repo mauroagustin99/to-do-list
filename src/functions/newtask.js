@@ -1,5 +1,6 @@
 import printTask from './domcontroller.js';
-
+import { overlay } from './domcontroller.js';
+//import { taskDialogContent } from './domcontroller.js';
 class Task {
   constructor(task, dueDate, priority, state) {
     this.task = task;
@@ -16,7 +17,17 @@ function saveTasktoLocalStorage(task) {
 }
 
 export default function NewTask() {
-  const myTask = new Task('Cuarta nota', '2024-05-30', 'High', 'Pending');
-  saveTasktoLocalStorage(myTask);
-  printTask(myTask.task, myTask.dueDate, myTask.priority, myTask.state);
+  overlay()
+    .then((formData) => {
+      const myTask = new Task(
+        formData.taskName,
+        formData.dueDate,
+        formData.priority
+      );
+      saveTasktoLocalStorage(myTask);
+      printTask(myTask.task, myTask.dueDate, myTask.priority, myTask.state);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
