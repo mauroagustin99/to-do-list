@@ -13,10 +13,15 @@ export default function printTask(name, date, priority, state) {
 
   const taskname = document.createElement('p');
   taskname.textContent = name;
+  taskname.setAttribute('contenteditable', 'true');
+
   const taskdate = document.createElement('p');
   taskdate.textContent = date;
+  taskdate.setAttribute('contenteditable', 'true');
+
   const taskpriority = document.createElement('p');
   taskpriority.textContent = priority;
+  taskpriority.setAttribute('contenteditable', 'true');
 
   task.appendChild(taskstate);
   task.appendChild(taskname);
@@ -137,11 +142,11 @@ function makeModal() {
           <input type="date" id="due-date" name="due-date" required />
 
           <p class="priority-p">Priority:</p>
-          <input type="radio" id="low-priority" name="options" value="low" required />
+          <input type="radio" id="low-priority" name="options" value="Low" required />
           <label for="option1">Low</label><br />
-          <input type="radio" id="medium-priority" name="options" value="medium" />
+          <input type="radio" id="medium-priority" name="options" value="Medium" />
           <label for="option2">Medium</label><br />
-          <input type="radio" id="high-priority" name="options" value="high" />
+          <input type="radio" id="high-priority" name="options" value="High" />
           <label for="option3">High</label><br />
 
           <button type="submit">Guardar</button>

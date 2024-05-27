@@ -1,5 +1,6 @@
 import printTask from './domcontroller.js';
 import { overlay } from './domcontroller.js';
+import modifyTask from './modifytask.js';
 //import { taskDialogContent } from './domcontroller.js';
 class Task {
   constructor(task, dueDate, priority, state) {
@@ -27,6 +28,7 @@ export default function NewTask() {
       );
       saveTasktoLocalStorage(myTask);
       printTask(myTask.task, myTask.dueDate, myTask.priority, myTask.state);
+      modifyTask();
     })
     .catch((error) => {
       console.error(error);

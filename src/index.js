@@ -8,6 +8,7 @@ import {
 } from 'date-fns';
 import printTask from './functions/domcontroller.js';
 import NewTask from './functions/newtask.js';
+import modifyTask from './functions/modifytask.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   //newTask button
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tasks.forEach((task) => {
       printTask(task.task, task.dueDate, task.priority, task.state);
     });
+    modifyTask();
   }
 
   loadTasksFromLocalStorage();
