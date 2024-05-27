@@ -15,13 +15,18 @@ export default function printTask(name, date, priority, state) {
   taskname.textContent = name;
   taskname.setAttribute('contenteditable', 'true');
 
-  const taskdate = document.createElement('p');
-  taskdate.textContent = date;
-  taskdate.setAttribute('contenteditable', 'true');
+  const taskdate = document.createElement('input');
+  taskdate.type = 'date';
+  taskdate.value = date;
 
-  const taskpriority = document.createElement('p');
-  taskpriority.textContent = priority;
-  taskpriority.setAttribute('contenteditable', 'true');
+  const taskpriority = document.createElement('select');
+  taskpriority.classList.add('priority-select');
+  taskpriority.innerHTML = `
+  <option value="High">High</option>
+  <option value="Medium">Medium</option>
+  <option value="Low">Low</option>
+`;
+  taskpriority.value = priority;
 
   task.appendChild(taskstate);
   task.appendChild(taskname);
