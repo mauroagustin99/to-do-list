@@ -95,6 +95,14 @@ export function overlay() {
       options.forEach((option) => {
         option.checked = false; // Desmarca todas las opciones
       });
+
+      // Remove event listeners
+      modal
+        .querySelector('#modal-form')
+        .removeEventListener('submit', submitHandler);
+      closeBtn.removeEventListener('click', closeHandler);
+      cancelBtn.removeEventListener('click', cancelHandler);
+      window.removeEventListener('click', windowClickHandler);
     };
 
     // Register event listeners

@@ -17,6 +17,7 @@ function saveTasktoLocalStorage(task) {
 }
 
 export default function NewTask() {
+  const prueba = new Task('hola', Date(), 'High', 'pending');
   overlay()
     .then((formData) => {
       const myTask = new Task(
