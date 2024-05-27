@@ -17,13 +17,13 @@ function saveTasktoLocalStorage(task) {
 }
 
 export default function NewTask() {
-  const prueba = new Task('hola', Date(), 'High', 'pending');
   overlay()
     .then((formData) => {
       const myTask = new Task(
         formData.taskName,
         formData.dueDate,
-        formData.priority
+        formData.priority,
+        false
       );
       saveTasktoLocalStorage(myTask);
       printTask(myTask.task, myTask.dueDate, myTask.priority, myTask.state);
