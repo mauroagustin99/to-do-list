@@ -1,3 +1,6 @@
+import { saveProjecToLocalStorage } from './saveToLocalStorage.js';
+import { updateProjectsInLocalStorage } from './updateLocalStorage.js';
+
 let modal; //Creating modal to just making it once per session
 
 export default function printTask(name, date, priority, state) {
@@ -165,6 +168,34 @@ function makeModal() {
   return modal;
 }
 
-if (module.hot) {
-  module.hot.accept();
+export function createProject() {
+  const projectList = document.getElementById('project-list');
+  const newProject = document.createElement('input');
+  newProject.type = 'text';
+  newProject.placeholder = 'Project Name';
+
+  const newLi = document.createElement('li');
+  newLi.appendChild(newProject);
+  projectList.appendChild(newLi);
+  // Focus the input so the user can start typing immediately
+  newProject.focus();
+
+  // Add event listeners for when the user finishes typing
+  newProject.addEventListener('blur', () => {
+    saveProjecToLocalStorage(newProject, newLi, projectList);
+  });
+
+  newProject.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      saveProjecToLocalStorage(newProject, newLi, projectList);
+    }
+  });
+}
+
+export function addProjectToList(projectName) {
+  const projectList = document.getElementById('project-list');
+  const listItem = document.createElement('li');
+  console.log('li:' + listItem);
+  listItem.textContent = projectName;
+  projectList.appendChild(listItem);
 }

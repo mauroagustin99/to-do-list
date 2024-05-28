@@ -6,18 +6,26 @@ import {
   compareAsc,
   differenceInDays,
 } from 'date-fns';
-import printTask from './functions/domcontroller.js';
+import printTask, { createProject } from './functions/domcontroller.js';
 import NewTask from './functions/newtask.js';
-import { loadTasksFromLocalStorage } from './functions/loadLocalStorage.js';
+import {
+  loadProjectsFromLocalStorage,
+  loadTasksFromLocalStorage,
+} from './functions/loadLocalStorage.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  //newTask button
+  loadTasksFromLocalStorage();
+  loadProjectsFromLocalStorage();
+  //Add project button
+  const newProject = document.getElementById('add-project');
+  newProject.addEventListener('click', () => {
+    createProject();
+  });
+  //Add Task button
   const newTask = document.getElementById('new-task');
   newTask.addEventListener('click', () => {
     NewTask();
   });
-
-  loadTasksFromLocalStorage();
 
   class Note {
     constructor(title, description) {
