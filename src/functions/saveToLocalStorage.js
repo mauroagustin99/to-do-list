@@ -7,7 +7,7 @@ export function saveTasktoLocalStorage(task) {
 }
 
 export function saveProjecToLocalStorage(input, listItem, projectList) {
-  const projectName = input.value.trim(); //Removes whitespace from both ends
+  const projectName = input.value.trim(); //Removes whitespace from both end start
   if (projectName) {
     listItem.textContent = projectName;
     updateProjectsInLocalStorage(projectList);

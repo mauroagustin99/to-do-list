@@ -12,5 +12,9 @@ export function loadTasksFromLocalStorage() {
 
 export function loadProjectsFromLocalStorage() {
   const projects = JSON.parse(localStorage.getItem('projects')) || [];
+  if (!projects.includes('General')) {
+    projects.push('General');
+    localStorage.setItem('projects', JSON.stringify(projects));
+  }
   projects.forEach((projectName) => addProjectToList(projectName));
 }
