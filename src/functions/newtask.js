@@ -1,16 +1,8 @@
 import printTask from './domcontroller.js';
 import { overlay } from './domcontroller.js';
 import modifyTask from './modifytask.js';
-import { saveTasktoLocalStorage } from './saveToLocalStorage.js';
-
-class Task {
-  constructor(task, dueDate, priority, state) {
-    this.task = task;
-    this.dueDate = dueDate;
-    this.priority = priority;
-    this.state = state;
-  }
-}
+import { saveTasktoLocalStorage } from './local_storage/saveToLocalStorage.js';
+import { Task } from './tasks.js';
 
 export default function NewTask() {
   overlay()

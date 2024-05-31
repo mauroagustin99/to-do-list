@@ -1,5 +1,6 @@
-import { saveProjecToLocalStorage } from './saveToLocalStorage.js';
-import { updateProjectsInLocalStorage } from './updateLocalStorage.js';
+import { saveProjecToLocalStorage } from './local_storage/saveToLocalStorage.js';
+import { updateProjectsInLocalStorage } from './local_storage/updateLocalStorage.js';
+import { Project } from './projects.js';
 
 let modal; //Creating modal to just making it once per session
 
@@ -192,10 +193,10 @@ export function createProject() {
   });
 }
 
-export function addProjectToList(projectName) {
+export function addProjectToList(project) {
   const projectList = document.getElementById('project-list');
   const listItem = document.createElement('li');
-  console.log('li:' + listItem);
-  listItem.textContent = projectName;
+
+  listItem.textContent = project.getProjectName();
   projectList.appendChild(listItem);
 }

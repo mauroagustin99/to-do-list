@@ -11,7 +11,7 @@ import NewTask from './functions/newtask.js';
 import {
   loadProjectsFromLocalStorage,
   loadTasksFromLocalStorage,
-} from './functions/loadLocalStorage.js';
+} from './functions/local_storage/loadLocalStorage.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   loadTasksFromLocalStorage();

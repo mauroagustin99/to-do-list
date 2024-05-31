@@ -1,4 +1,4 @@
-import { updateTaskInLocalStorage } from './updateLocalStorage.js';
+import { updateTaskInLocalStorage } from './local_storage/updateLocalStorage.js';
 
 export default function modifyTask() {
   const tasksContainer = document.getElementById('tasks-container');

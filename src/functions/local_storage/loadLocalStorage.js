@@ -1,6 +1,7 @@
-import modifyTask from './modifytask.js';
-import printTask from './domcontroller.js';
-import { addProjectToList } from './domcontroller.js';
+import modifyTask from '../modifytask.js';
+import printTask from '../domcontroller.js';
+import { addProjectToList } from '../domcontroller.js';
+import { Project } from '../projects.js';
 
 export function loadTasksFromLocalStorage() {
   const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -12,9 +13,13 @@ export function loadTasksFromLocalStorage() {
 
 export function loadProjectsFromLocalStorage() {
   const projects = JSON.parse(localStorage.getItem('projects')) || [];
-  if (!projects.includes('General')) {
+  /*if (!projects.includes('General')) {
     projects.push('General');
     localStorage.setItem('projects', JSON.stringify(projects));
-  }
-  projects.forEach((projectName) => addProjectToList(projectName));
+  }*/
+
+  projects.forEach((project) => {
+    const projectInstance = new Project(project.name, project.tasks);
+    addProjectToList(projectInstance);
+  });
 }

@@ -1,6 +1,17 @@
 import printTask from './domcontroller.js';
 import modifyTask from './modifytask.js';
 
+export class Project {
+  constructor(name, tasks = []) {
+    this.name = name;
+    this.tasks = tasks;
+  }
+
+  getProjectName() {
+    return this.name;
+  }
+}
+
 export function loadProjectsFromLocalStorage() {
   const projects = JSON.parse(localStorage.getItem('projects')) || {};
   const projectList = document.getElementById('project-list');

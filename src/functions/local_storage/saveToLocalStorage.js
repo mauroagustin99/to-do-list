@@ -1,4 +1,5 @@
 import { updateProjectsInLocalStorage } from './updateLocalStorage.js';
+import { Project } from '../projects.js';
 
 export function saveTasktoLocalStorage(task) {
   let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
