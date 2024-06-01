@@ -16,12 +16,12 @@ export function loadProjectsFromLocalStorage() {
   try {
     const storedProjects = localStorage.getItem('projects');
 
-    // Verifica si hay algo almacenado y no es una cadena vacía
+    // Check if there is something stored and it is not an empty string
     if (storedProjects) {
       projects = JSON.parse(storedProjects);
     }
 
-    // Asegúrate de que projects sea un array
+    // Make sure projects is an array
     if (!Array.isArray(projects)) {
       projects = [];
     }

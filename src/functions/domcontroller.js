@@ -1,8 +1,7 @@
 import { saveProjecToLocalStorage } from './local_storage/saveToLocalStorage.js';
-import { updateProjectsInLocalStorage } from './local_storage/updateLocalStorage.js';
-import { Project } from './projects.js';
 import { getCurrentProject, setCurrentProject } from './projectcontroller.js';
 import modifyTask from './modifytask.js';
+import { deleteProjectFromLocalStorage } from './local_storage/deleteFromLocalStorage.js';
 
 let modal; //Creating modal to just making it once per session
 
@@ -224,9 +223,14 @@ export function currentProject() {
       clearTaskList();
 
       // Remove current-project css class in all projects
-      projectList
-        .querySelectorAll('li')
-        .forEach((item) => item.classList.remove('current-project'));
+      projectList.querySelectorAll('li').forEach((item) => {
+        item.classList.remove('current-project');
+        // Remove existing delete button if present
+        const deleteButton = item.querySelector('.delete-button');
+        if (deleteButton) {
+          item.removeChild(deleteButton);
+        }
+      });
 
       // Add current-project css class to the current project
       li.classList.add('current-project');
@@ -241,6 +245,21 @@ export function currentProject() {
           printTask(task.task, task.dueDate, task.priority, task.state);
         });
         modifyTask();
+      }
+
+      // Add delete button if project is not 'General'
+      if (currentProject !== 'General') {
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Eliminar';
+        deleteButton.classList.add('delete-button');
+        deleteButton.style.marginLeft = '10px';
+        li.appendChild(deleteButton);
+
+        deleteButton.addEventListener('click', (event) => {
+          event.stopPropagation(); // Prevent triggering the click event on the li element
+          projectList.removeChild(li);
+          deleteProjectFromLocalStorage(currentProject);
+        });
       }
     });
   });
