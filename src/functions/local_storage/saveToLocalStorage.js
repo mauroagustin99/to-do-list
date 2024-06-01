@@ -2,7 +2,6 @@ import {
   pushTaskToCurrentProject,
   updateProjectsInLocalStorage,
 } from './updateLocalStorage.js';
-import { Project } from '../projects.js';
 import { getCurrentProject } from '../projectcontroller.js';
 
 export function saveTaskToCurrentProject(task) {

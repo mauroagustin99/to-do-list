@@ -9,18 +9,28 @@ import {
 import printTask, {
   createProject,
   currentProject,
+  initializeProjectSelection,
 } from './functions/domcontroller.js';
 import NewTask from './functions/newtask.js';
 import {
   loadProjectsFromLocalStorage,
   loadTasksFromLocalStorage,
 } from './functions/local_storage/loadLocalStorage.js';
+import {
+  initializeGeneralProject,
+  setCurrentProject,
+} from './functions/projectcontroller.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadTasksFromLocalStorage();
+  //Load Projects from the local storage
   loadProjectsFromLocalStorage();
 
-  currentProject();
+  // Initialize "General" project if it doesn't exist
+  initializeGeneralProject();
+
+  // Set "General" as the current project each time DOMContent is loaded
+  initializeProjectSelection();
+
   //Add project button
   const newProject = document.getElementById('add-project');
   newProject.addEventListener('click', () => {

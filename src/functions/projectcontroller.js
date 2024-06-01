@@ -19,3 +19,17 @@ export function getTasksForProject(projectName) {
   const project = storedProjects.find((proj) => proj.name === projectName);
   return project ? project.tasks : [];
 }
+
+export function initializeGeneralProject() {
+  const storedProjects = JSON.parse(localStorage.getItem('projects')) || [];
+  const generalProject = storedProjects.find(
+    (project) => project.name === 'General'
+  );
+
+  if (!generalProject) {
+    const newGeneralProject = new Project('General');
+    storedProjects.push(newGeneralProject);
+    localStorage.setItem('projects', JSON.stringify(storedProjects));
+    projects = storedProjects;
+  }
+}

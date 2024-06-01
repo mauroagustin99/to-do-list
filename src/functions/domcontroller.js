@@ -185,11 +185,13 @@ export function createProject() {
   // Add event listeners for when the user finishes typing
   newProject.addEventListener('blur', () => {
     saveProjecToLocalStorage(newProject, newLi, projectList);
+    selectProject(newLi); //Select new project as current
   });
 
   newProject.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
       saveProjecToLocalStorage(newProject, newLi, projectList);
+      selectProject(newLi);
     }
   });
 }
@@ -214,53 +216,65 @@ function clearTaskList() {
   taskList.innerHTML = '';
 }
 
-export function currentProject() {
+function selectProject(li) {
+  const projectList = document.getElementById('project-list');
+
+  // Clear task container before loading current project tasks
+  clearTaskList();
+
+  // Remove current-project css class and delete button in all projects
+  projectList.querySelectorAll('li').forEach((item) => {
+    item.classList.remove('current-project');
+    const deleteButton = item.querySelector('.delete-button');
+    if (deleteButton) {
+      item.removeChild(deleteButton);
+    }
+  });
+
+  // Add current-project css class to the current project
+  li.classList.add('current-project');
+
+  // Set clicked project to current project
+  const projectName = li.textContent.trim();
+  setCurrentProject(projectName);
+
+  // Show current project tasks
+  const currentProject = getCurrentProject();
+  if (currentProject) {
+    currentProject.tasks.forEach((task) => {
+      printTask(task.task, task.dueDate, task.priority, task.state);
+    });
+    modifyTask();
+  }
+
+  // Add delete button if project is not 'General'
+  if (projectName !== 'General') {
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Eliminar';
+    deleteButton.classList.add('delete-button');
+    li.appendChild(deleteButton);
+
+    deleteButton.addEventListener('click', (event) => {
+      event.stopPropagation(); // Prevent triggering the click event on the li element
+      projectList.removeChild(li);
+      deleteProjectFromLocalStorage(projectName);
+    });
+  }
+}
+
+export function initializeProjectSelection() {
   const projectList = document.getElementById('project-list');
 
   projectList.querySelectorAll('li').forEach((li) => {
-    li.addEventListener('click', () => {
-      //Clear task container before load current project tasks
-      clearTaskList();
-
-      // Remove current-project css class in all projects
-      projectList.querySelectorAll('li').forEach((item) => {
-        item.classList.remove('current-project');
-        // Remove existing delete button if present
-        const deleteButton = item.querySelector('.delete-button');
-        if (deleteButton) {
-          item.removeChild(deleteButton);
-        }
-      });
-
-      // Add current-project css class to the current project
-      li.classList.add('current-project');
-
-      // Set clicked project to current project
-      setCurrentProject(li.textContent.trim());
-
-      // Show current project tasks
-      const currentProject = getCurrentProject();
-      if (currentProject) {
-        currentProject.tasks.forEach((task) => {
-          printTask(task.task, task.dueDate, task.priority, task.state);
-        });
-        modifyTask();
-      }
-
-      // Add delete button if project is not 'General'
-      if (currentProject !== 'General') {
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Eliminar';
-        deleteButton.classList.add('delete-button');
-        deleteButton.style.marginLeft = '10px';
-        li.appendChild(deleteButton);
-
-        deleteButton.addEventListener('click', (event) => {
-          event.stopPropagation(); // Prevent triggering the click event on the li element
-          projectList.removeChild(li);
-          deleteProjectFromLocalStorage(currentProject);
-        });
-      }
-    });
+    li.addEventListener('click', () => selectProject(li));
   });
+
+  // Automatically select the "General" project on page load
+  const generalProjectLi = Array.from(projectList.querySelectorAll('li')).find(
+    (li) => li.textContent.trim() === 'General'
+  );
+
+  if (generalProjectLi) {
+    selectProject(generalProjectLi);
+  }
 }
