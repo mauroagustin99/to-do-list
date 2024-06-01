@@ -1,5 +1,5 @@
 import { Project } from '../projects.js';
-import { getTasksForProject } from '../projects.js';
+import { getTasksForProject } from '../projectcontroller.js';
 
 export function updateTaskInLocalStorage(tasks) {
   localStorage.setItem('tasks', JSON.stringify(tasks));

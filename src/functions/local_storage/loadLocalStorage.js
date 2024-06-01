@@ -13,7 +13,6 @@ export function loadTasksFromLocalStorage() {
 
 export function loadProjectsFromLocalStorage() {
   let projects = [];
-
   try {
     const storedProjects = localStorage.getItem('projects');
 

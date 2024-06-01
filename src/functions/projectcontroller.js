@@ -13,3 +13,9 @@ export function setCurrentProject(name) {
 export function getCurrentProject() {
   return projects.find((project) => project.name === currentProjectName);
 }
+
+export function getTasksForProject(projectName) {
+  const storedProjects = JSON.parse(localStorage.getItem('projects')) || [];
+  const project = storedProjects.find((proj) => proj.name === projectName);
+  return project ? project.tasks : [];
+}
