@@ -1,19 +1,26 @@
-import { updateProjectsInLocalStorage } from './updateLocalStorage.js';
+import {
+  pushTaskToCurrentProject,
+  updateProjectsInLocalStorage,
+} from './updateLocalStorage.js';
 import { Project } from '../projects.js';
+import { getCurrentProject } from '../projectcontroller.js';
 
-export function saveTasktoLocalStorage(task) {
-  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-  tasks.push(task);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+export function saveTaskToCurrentProject(task) {
+  const currentProject = getCurrentProject();
+
+  if (currentProject) {
+    currentProject.tasks.push(task); //Push created task to the current proyect
+    pushTaskToCurrentProject(currentProject); //Update current project to the local storage with the new task
+  }
 }
 
 export function saveProjecToLocalStorage(input, listItem, projectList) {
   const projectName = input.value.trim(); //Removes whitespace from both end start
   if (projectName) {
     listItem.textContent = projectName;
-    updateProjectsInLocalStorage(projectList);
+    updateProjectsInLocalStorage();
   } else {
     projectList.removeChild(listItem);
-    updateProjectsInLocalStorage(projectList);
+    updateProjectsInLocalStorage();
   }
 }

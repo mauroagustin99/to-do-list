@@ -12,7 +12,12 @@ export class Project {
   }
 }
 
-export function loadProjectsFromLocalStorage() {
+export function getTasksForProject(projectName) {
+  const storedProjects = JSON.parse(localStorage.getItem('projects')) || [];
+  const project = storedProjects.find((proj) => proj.name === projectName);
+  return project ? project.tasks : [];
+}
+/*export function loadProjectsFromLocalStorage() {
   const projects = JSON.parse(localStorage.getItem('projects')) || {};
   const projectList = document.getElementById('project-list');
   projectList.innerHTML = '';
@@ -50,3 +55,4 @@ function loadTasks(project) {
   });
   modifyTask(project); // Pass project name to modifyTask
 }
+*/

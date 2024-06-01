@@ -43,3 +43,7 @@ header {
   width: 80%;
   filter: none;
 }
+
+.current-project {
+  background-color: blue;
+}

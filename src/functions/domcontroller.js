@@ -1,6 +1,7 @@
 import { saveProjecToLocalStorage } from './local_storage/saveToLocalStorage.js';
 import { updateProjectsInLocalStorage } from './local_storage/updateLocalStorage.js';
 import { Project } from './projects.js';
+import { setCurrentProject } from './projectcontroller.js';
 
 let modal; //Creating modal to just making it once per session
 
@@ -199,4 +200,36 @@ export function addProjectToList(project) {
 
   listItem.textContent = project.getProjectName();
   projectList.appendChild(listItem);
+}
+
+export function clearProjectList() {
+  const projectList = document.getElementById('project-list');
+  while (projectList.firstChild) {
+    projectList.removeChild(projectList.firstChild);
+  }
+}
+
+export function currentProject() {
+  const projectList = document.getElementById('project-list');
+
+  projectList.querySelectorAll('li').forEach((li) => {
+    li.addEventListener('click', () => {
+      // Remove current-project css class in all projects
+      projectList
+        .querySelectorAll('li')
+        .forEach((item) => item.classList.remove('current-project'));
+
+      // Add current-project css class to the current project
+      li.classList.add('current-project');
+
+      // Opcional: establecer el proyecto actual en el gestor de proyectos
+      setCurrentProject(li.textContent.trim());
+
+      // Opcional: actualizar la lista de tareas en la UI
+      //const currentProject = getCurrentProject();
+      //if (currentProject) {
+      //  updateTaskListUI(currentProject);
+      //}
+    });
+  });
 }

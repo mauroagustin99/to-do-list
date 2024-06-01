@@ -6,7 +6,10 @@ import {
   compareAsc,
   differenceInDays,
 } from 'date-fns';
-import printTask, { createProject } from './functions/domcontroller.js';
+import printTask, {
+  createProject,
+  currentProject,
+} from './functions/domcontroller.js';
 import NewTask from './functions/newtask.js';
 import {
   loadProjectsFromLocalStorage,
@@ -16,6 +19,8 @@ import {
 document.addEventListener('DOMContentLoaded', () => {
   loadTasksFromLocalStorage();
   loadProjectsFromLocalStorage();
+
+  currentProject();
   //Add project button
   const newProject = document.getElementById('add-project');
   newProject.addEventListener('click', () => {

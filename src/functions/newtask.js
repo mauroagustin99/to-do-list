@@ -1,7 +1,7 @@
 import printTask from './domcontroller.js';
 import { overlay } from './domcontroller.js';
 import modifyTask from './modifytask.js';
-import { saveTasktoLocalStorage } from './local_storage/saveToLocalStorage.js';
+import { saveTaskToCurrentProject } from './local_storage/saveToLocalStorage.js';
 import { Task } from './tasks.js';
 
 export default function NewTask() {
@@ -13,7 +13,8 @@ export default function NewTask() {
         formData.priority,
         false
       );
-      saveTasktoLocalStorage(myTask);
+      console.log('task creado:' + myTask);
+      saveTaskToCurrentProject(myTask);
       printTask(myTask.task, myTask.dueDate, myTask.priority, myTask.state);
       modifyTask();
     })
