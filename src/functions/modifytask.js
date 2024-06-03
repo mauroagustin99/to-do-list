@@ -1,8 +1,5 @@
-import {
-  updateProjectsInLocalStorage,
-  updateTaskInLocalStorage,
-  updateTaskInProject,
-} from './local_storage/updateLocalStorage.js';
+import { updateTaskInProject } from './local_storage/updateLocalStorage.js';
+import { getCurrentProject } from './projectcontroller.js';
 
 export default function modifyTask() {
   const tasksContainer = document.getElementById('tasks-container');
@@ -16,28 +13,75 @@ export default function modifyTask() {
     const taskPriority = taskDiv.querySelector('.priority-select');
 
     taskState.addEventListener('change', () => {
-      let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-      tasks[index].state = taskState.checked; // Use checked option
-      updateTaskInProject(index, tasks[index]);
+      let projects = JSON.parse(localStorage.getItem('projects')) || [];
+      const currentProject = getCurrentProject();
+      if (currentProject) {
+        const projectIndex = projects.findIndex(
+          (project) => project.name === currentProject.name
+        );
+        if (projectIndex !== -1) {
+          projects[projectIndex].tasks[index].state = taskState.checked;
+          updateTaskInProject(
+            projectIndex,
+            index,
+            projects[projectIndex].tasks[index]
+          );
+        }
+      }
     });
 
     taskName.addEventListener('input', () => {
-      let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-      tasks[index].task = taskName.textContent; // Use written value
-      updateTaskInProject(index, tasks[index]);
+      let projects = JSON.parse(localStorage.getItem('projects')) || [];
+      const currentProject = getCurrentProject();
+      if (currentProject) {
+        const projectIndex = projects.findIndex(
+          (project) => project.name === currentProject.name
+        );
+        if (projectIndex !== -1) {
+          projects[projectIndex].tasks[index].task = taskName.textContent;
+          updateTaskInProject(
+            projectIndex,
+            index,
+            projects[projectIndex].tasks[index]
+          );
+        }
+      }
     });
 
     taskDate.addEventListener('input', () => {
-      let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-      tasks[index].dueDate = taskDate.value; // Use value chosen on calendary
-      updateTaskInProject(index, tasks[index]);
+      let projects = JSON.parse(localStorage.getItem('projects')) || [];
+      const currentProject = getCurrentProject();
+      if (currentProject) {
+        const projectIndex = projects.findIndex(
+          (project) => project.name === currentProject.name
+        );
+        if (projectIndex !== -1) {
+          projects[projectIndex].tasks[index].dueDate = taskDate.value;
+          updateTaskInProject(
+            projectIndex,
+            index,
+            projects[projectIndex].tasks[index]
+          );
+        }
+      }
     });
 
     taskPriority.addEventListener('change', () => {
-      // Cambiado a change event
-      let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-      tasks[index].priority = taskPriority.value; // Use value chosen on the select
-      updateTaskInProject(index, tasks[index]);
+      let projects = JSON.parse(localStorage.getItem('projects')) || [];
+      const currentProject = getCurrentProject();
+      if (currentProject) {
+        const projectIndex = projects.findIndex(
+          (project) => project.name === currentProject.name
+        );
+        if (projectIndex !== -1) {
+          projects[projectIndex].tasks[index].priority = taskPriority.value;
+          updateTaskInProject(
+            projectIndex,
+            index,
+            projects[projectIndex].tasks[index]
+          );
+        }
+      }
     });
   });
 }

@@ -43,20 +43,14 @@ export function pushTaskToCurrentProject(currentProject) {
   }
 }
 
-export function updateTaskInProject(index, updatedTask) {
+export function updateTaskInProject(projectIndex, taskIndex, updatedTask) {
   let projects = JSON.parse(localStorage.getItem('projects')) || [];
-  const currentProject = getCurrentProject();
-
-  if (currentProject) {
-    const projectIndex = projects.findIndex(
-      (project) => project.name === currentProject.name
-    );
-    if (projectIndex !== -1) {
-      projects[projectIndex].tasks[index] = updatedTask;
-      localStorage.setItem('projects', JSON.stringify(projects));
-    }
+  if (projects[projectIndex]) {
+    projects[projectIndex].tasks[taskIndex] = updatedTask;
+    localStorage.setItem('projects', JSON.stringify(projects));
+  } else {
+    console.error('El proyecto no se encontró en localStorage');
   }
-  updateProjects(projects);
 }
 
 function updateProjects(projects) {

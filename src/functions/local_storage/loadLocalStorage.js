@@ -30,12 +30,6 @@ export function loadProjectsFromLocalStorage() {
     projects = [];
   }
 
-  /*if (!projects.includes('General')) {
-    projects.push('General');
-    localStorage.setItem('projects', JSON.stringify(projects));
-  }*/
-
-  // Clear project list before load DOM
   clearProjectList();
 
   projects.forEach((project) => {
