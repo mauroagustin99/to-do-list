@@ -186,25 +186,33 @@ function makeModal() {
 
 export function createProject() {
   const projectList = document.getElementById('project-list');
-  const newProject = document.createElement('input');
-  newProject.type = 'text';
-  newProject.placeholder = 'Project Name';
+  const newProjectInput = document.createElement('input');
+  newProjectInput.type = 'text';
+  newProjectInput.placeholder = 'Project Name';
 
   const newLi = document.createElement('li');
-  newLi.appendChild(newProject);
+  newLi.appendChild(newProjectInput);
   projectList.appendChild(newLi);
   // Focus the input so the user can start typing immediately
-  newProject.focus();
+  newProjectInput.focus();
 
   // Add event listeners for when the user finishes typing
-  newProject.addEventListener('blur', () => {
-    saveProjecToLocalStorage(newProject, newLi, projectList);
-    selectProject(newLi); //Select new project as current
+  newProjectInput.addEventListener('blur', () => {
+    if (newProjectInput.value.trim()) {
+      saveProjecToLocalStorage(
+        newProjectInput.value.trim(),
+        newLi,
+        projectList
+      );
+      selectProject(newLi); //Select new project as current
+    } else {
+      projectList.removeChild(newLi);
+    }
   });
 
-  newProject.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-      saveProjecToLocalStorage(newProject, newLi, projectList);
+  newProjectInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter' && newProjectInput.value.trim()) {
+      saveProjecToLocalStorage(newProjectInput, newLi, projectList);
       selectProject(newLi);
     }
   });
@@ -249,7 +257,7 @@ function selectProject(li) {
   li.classList.add('current-project');
 
   // Set clicked project to current project
-  const projectName = li.textContent.trim();
+  const projectName = li.childNodes[0].nodeValue.trim();
   setCurrentProject(projectName);
 
   // Show current project tasks

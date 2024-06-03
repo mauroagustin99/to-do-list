@@ -1,8 +1,10 @@
 import {
+  addProjectToLocalStorage,
   pushTaskToCurrentProject,
   updateProjectsInLocalStorage,
 } from './updateLocalStorage.js';
 import { getCurrentProject } from '../projectcontroller.js';
+import { Project } from '../projects.js';
 
 export function saveTaskToCurrentProject(task) {
   const currentProject = getCurrentProject();
@@ -17,6 +19,7 @@ export function saveProjecToLocalStorage(input, listItem, projectList) {
   const projectName = input.value.trim(); //Removes whitespace from both end start
   if (projectName) {
     listItem.textContent = projectName;
+    addProjectToLocalStorage(new Project(projectName));
     updateProjectsInLocalStorage();
   } else {
     projectList.removeChild(listItem);

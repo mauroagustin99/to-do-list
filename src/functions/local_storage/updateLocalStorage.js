@@ -1,16 +1,16 @@
 import { Project } from '../projects.js';
-import { getCurrentProject, getTasksForProject } from '../projectcontroller.js';
+import { getTasksForProject } from '../projectcontroller.js';
 
-export function updateTaskInLocalStorage(tasks) {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+export function addProjectToLocalStorage(project) {
+  let projects = JSON.parse(localStorage.getItem('projects')) || [];
+  projects.push(project);
+  localStorage.setItem('projects', JSON.stringify(projects));
 }
-
 export function updateProjectsInLocalStorage() {
   const projects = [];
-  console.log(projects);
   const projectList = document.getElementById('project-list');
   projectList.querySelectorAll('li').forEach((li) => {
-    const projectName = li.textContent;
+    const projectName = li.childNodes[0].nodeValue.trim();
     const tasks = getTasksForProject(projectName);
     const projectsObject = new Project(projectName, tasks);
     projects.push(projectsObject);
@@ -51,8 +51,4 @@ export function updateTaskInProject(projectIndex, taskIndex, updatedTask) {
   } else {
     console.error('El proyecto no se encontró en localStorage');
   }
-}
-
-function updateProjects(projects) {
-  localStorage.setItem('projects', JSON.stringify(projects));
 }

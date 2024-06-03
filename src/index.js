@@ -6,20 +6,13 @@ import {
   compareAsc,
   differenceInDays,
 } from 'date-fns';
-import printTask, {
+import {
   createProject,
-  currentProject,
   initializeProjectSelection,
 } from './functions/domcontroller.js';
 import NewTask from './functions/newtask.js';
-import {
-  loadProjectsFromLocalStorage,
-  loadTasksFromLocalStorage,
-} from './functions/local_storage/loadLocalStorage.js';
-import {
-  initializeGeneralProject,
-  setCurrentProject,
-} from './functions/projectcontroller.js';
+import { loadProjectsFromLocalStorage } from './functions/local_storage/loadLocalStorage.js';
+import { initializeGeneralProject } from './functions/projectcontroller.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   //Load Projects from the local storage
