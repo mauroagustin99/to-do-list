@@ -1,11 +1,14 @@
 import { saveProjecToLocalStorage } from './local_storage/saveToLocalStorage.js';
 import { getCurrentProject, setCurrentProject } from './projectcontroller.js';
 import modifyTask from './modifytask.js';
-import { deleteProjectFromLocalStorage } from './local_storage/deleteFromLocalStorage.js';
+import {
+  deleteProjectFromLocalStorage,
+  deleteTaskFromProject,
+} from './local_storage/deleteFromLocalStorage.js';
 
 let modal; //Creating modal to just making it once per session
 
-export default function printTask(name, date, priority, state) {
+export default function printTask(name, date, priority, state, taskIndex) {
   const tasksContainer = document.getElementById('tasks-container');
 
   //Making task and adding it to the task container
@@ -33,10 +36,21 @@ export default function printTask(name, date, priority, state) {
 `;
   taskpriority.value = priority;
 
+  const taskdeletebtn = document.createElement('button');
+  taskdeletebtn.classList.add('delete-task');
+  taskdeletebtn.textContent = 'Delete Task';
+
+  // Add event listener for deleting the task
+  taskdeletebtn.addEventListener('click', () => {
+    deleteTaskFromProject(taskIndex);
+    task.remove(); // Remove the task element from the DOM
+  });
+
   task.appendChild(taskstate);
   task.appendChild(taskname);
   task.appendChild(taskdate);
   task.appendChild(taskpriority);
+  task.appendChild(taskdeletebtn);
 
   tasksContainer.appendChild(task);
 }
@@ -241,8 +255,8 @@ function selectProject(li) {
   // Show current project tasks
   const currentProject = getCurrentProject();
   if (currentProject) {
-    currentProject.tasks.forEach((task) => {
-      printTask(task.task, task.dueDate, task.priority, task.state);
+    currentProject.tasks.forEach((task, index) => {
+      printTask(task.task, task.dueDate, task.priority, task.state, index);
     });
     modifyTask();
   }
