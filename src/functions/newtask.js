@@ -13,7 +13,7 @@ export default function NewTask() {
         formData.priority,
         false
       );
-      console.log('task creado:' + myTask);
+
       saveTaskToCurrentProject(myTask);
       printTask(myTask.task, myTask.dueDate, myTask.priority, myTask.state);
       modifyTask();

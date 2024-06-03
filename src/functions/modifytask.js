@@ -1,4 +1,8 @@
-import { updateTaskInLocalStorage } from './local_storage/updateLocalStorage.js';
+import {
+  updateProjectsInLocalStorage,
+  updateTaskInLocalStorage,
+  updateTaskInProject,
+} from './local_storage/updateLocalStorage.js';
 
 export default function modifyTask() {
   const tasksContainer = document.getElementById('tasks-container');
@@ -14,26 +18,26 @@ export default function modifyTask() {
     taskState.addEventListener('change', () => {
       let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
       tasks[index].state = taskState.checked; // Use checked option
-      updateTaskInLocalStorage(tasks);
+      updateTaskInProject(index, tasks[index]);
     });
 
     taskName.addEventListener('input', () => {
       let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
       tasks[index].task = taskName.textContent; // Use written value
-      updateTaskInLocalStorage(tasks);
+      updateTaskInProject(index, tasks[index]);
     });
 
     taskDate.addEventListener('input', () => {
       let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
       tasks[index].dueDate = taskDate.value; // Use value chosen on calendary
-      updateTaskInLocalStorage(tasks);
+      updateTaskInProject(index, tasks[index]);
     });
 
     taskPriority.addEventListener('change', () => {
       // Cambiado a change event
       let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
       tasks[index].priority = taskPriority.value; // Use value chosen on the select
-      updateTaskInLocalStorage(tasks);
+      updateTaskInProject(index, tasks[index]);
     });
   });
 }

@@ -1,5 +1,5 @@
 import { Project } from '../projects.js';
-import { getTasksForProject } from '../projectcontroller.js';
+import { getCurrentProject, getTasksForProject } from '../projectcontroller.js';
 
 export function updateTaskInLocalStorage(tasks) {
   localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -41,4 +41,24 @@ export function pushTaskToCurrentProject(currentProject) {
   } catch (e) {
     console.error('Error actualizando el proyecto en localStorage:', e);
   }
+}
+
+export function updateTaskInProject(index, updatedTask) {
+  let projects = JSON.parse(localStorage.getItem('projects')) || [];
+  const currentProject = getCurrentProject();
+
+  if (currentProject) {
+    const projectIndex = projects.findIndex(
+      (project) => project.name === currentProject.name
+    );
+    if (projectIndex !== -1) {
+      projects[projectIndex].tasks[index] = updatedTask;
+      localStorage.setItem('projects', JSON.stringify(projects));
+    }
+  }
+  updateProjects(projects);
+}
+
+function updateProjects(projects) {
+  localStorage.setItem('projects', JSON.stringify(projects));
 }
