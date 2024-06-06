@@ -1,4 +1,6 @@
 import './style.css';
+import './tasks.css';
+import './projects.css';
 import {
   format,
   addDays,

@@ -1,21 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 body {
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
   background-color: #fff;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 1fr 10fr;
+  grid-template-rows: 2fr 10fr;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo-svg {
+  height: 100px;
+}
+.logo-svg path {
+  stroke: white;
+}
+
+.logo-title {
+  display: block;
+  font-weight: 100;
+  font-style: italic;
+  font-size: 2.5em;
+  color: white;
+}
+
+/* Color Theme Swatches in Hex */
+
+.Abstract-marble-texture-background.-Colorful-backdrop-1-hex {
+  color: #2d3e40;
+}
+
+.Abstract-marble-texture-background.-Colorful-backdrop-2-hex {
+  color: #387373;
+}
+
+.Abstract-marble-texture-background.-Colorful-backdrop-3-hex {
+  color: #93bfb7;
+}
+.Abstract-marble-texture-background.-Colorful-backdrop-4-hex {
+  color: #97a6a0;
+}
+
+.Abstract-marble-texture-background.-Colorful-backdrop-5-hex {
+  color: #e4f2e7;
 }
 
 body > * {
-  border: 1px solid black;
 }
 
 header {
+  background-color: #387373;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
   grid-column: 1/4;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+#tasks-container {
+  padding: 1em;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 3em);
+  gap: 1em;
 }
 
 .task {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 1fr 7fr repeat(3, 1fr);
+  border-radius: 8px;
+  border: 2px solid #2d3e40;
+  align-items: center;
+  height: 3em;
+  width: 100%;
+  gap: 10px;
 }
 
 /*body.modal-open {
@@ -23,6 +87,7 @@ header {
   filter: blur(2px);
 }
 */
+
 .modal {
   display: none;
   position: fixed;
@@ -42,8 +107,4 @@ header {
   border: 1px solid #888;
   width: 80%;
   filter: none;
-}
-
-.current-project {
-  background-color: blue;
 }
