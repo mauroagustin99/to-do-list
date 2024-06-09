@@ -2,6 +2,7 @@ import modifyTask from '../modifytask.js';
 import printTask, { clearProjectList } from '../domcontroller.js';
 import { addProjectToList } from '../domcontroller.js';
 import { Project } from '../projects.js';
+import { printNote } from '../notecontroller.js';
 
 export function loadTasksFromLocalStorage() {
   const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -38,4 +39,11 @@ export function loadProjectsFromLocalStorage() {
   });
 
   return projects;
+}
+
+export function loadNotesFromLocalStorage() {
+  const notes = JSON.parse(localStorage.getItem('notes')) || [];
+  notes.forEach((note) => {
+    printNote(note.title, note.description, note.color);
+  });
 }

@@ -26,3 +26,9 @@ export function saveProjecToLocalStorage(input, listItem, projectList) {
     updateProjectsInLocalStorage();
   }
 }
+
+export function saveNoteToLocalStorage(note) {
+  let notes = JSON.parse(localStorage.getItem('notes')) || [];
+  notes.push(note);
+  localStorage.setItem('notes', JSON.stringify(notes));
+}

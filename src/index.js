@@ -13,12 +13,17 @@ import {
   initializeProjectSelection,
 } from './functions/domcontroller.js';
 import NewTask from './functions/newtask.js';
-import { loadProjectsFromLocalStorage } from './functions/local_storage/loadLocalStorage.js';
+import {
+  loadProjectsFromLocalStorage,
+  loadNotesFromLocalStorage,
+} from './functions/local_storage/loadLocalStorage.js';
 import { initializeGeneralProject } from './functions/projectcontroller.js';
+import NewNote from './functions/notecontroller.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   //Load Projects from the local storage
   loadProjectsFromLocalStorage();
+  loadNotesFromLocalStorage();
 
   // Initialize "General" project if it doesn't exist
   initializeGeneralProject();
@@ -37,10 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
     NewTask();
   });
 
-  class Note {
-    constructor(title, description) {
-      this.title = title;
-      this.description = description;
-    }
-  }
+  const newNote = document.getElementById('new-note');
+  newNote.addEventListener('click', () => {
+    NewNote();
+  });
 });
