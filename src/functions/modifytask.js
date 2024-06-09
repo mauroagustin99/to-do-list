@@ -75,6 +75,13 @@ export default function modifyTask() {
         );
         if (projectIndex !== -1) {
           projects[projectIndex].tasks[index].priority = taskPriority.value;
+          if (taskPriority.value === 'High') {
+            taskPriority.classList.add('high-priority');
+          } else if (taskPriority.value === 'Medium') {
+            taskPriority.classList.add('medium-priority');
+          } else if (taskPriority.value === 'Low') {
+            taskPriority.classList.add('low-priority');
+          }
           updateTaskInProject(
             projectIndex,
             index,

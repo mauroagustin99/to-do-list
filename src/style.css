@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 body {
+  padding: 0;
+  margin: 0;
+}
+.content-wrapper {
   height: 100vh;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
@@ -30,7 +34,28 @@ body {
   font-size: 2.5em;
   color: white;
 }
+.author {
+  font-size: 0.5em;
+  justify-self: end;
+  align-self: end;
+  color: white;
+}
 
+.github-link {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  padding: 10px 15px;
+
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.github-link:hover {
+  background-color: #0366d6;
+  color: white;
+}
 /* Color Theme Swatches in Hex */
 
 .Abstract-marble-texture-background.-Colorful-backdrop-1-hex {
@@ -52,9 +77,6 @@ body {
   color: #e4f2e7;
 }
 
-body > * {
-}
-
 header {
   background-color: #387373;
   display: grid;
@@ -62,33 +84,42 @@ header {
   gap: 10px;
   grid-column: 1/4;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-#tasks-container {
-  padding: 1em;
-  display: grid;
-  grid-template-rows: repeat(auto-fill, 3em);
-  gap: 1em;
-}
-
-.task {
-  display: grid;
-  grid-template-columns: 1fr 7fr repeat(3, 1fr);
-  border-radius: 8px;
-  border: 2px solid #2d3e40;
   align-items: center;
-  height: 3em;
-  width: 100%;
-  gap: 10px;
 }
 
-/*body.modal-open {
+#new-task,
+#new-note {
+  font-family: inherit;
+  font-size: 1em;
+  background-color: #93bfb7;
+  color: white;
+  padding: 0.7em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: pointer;
+  height: 5em;
+}
+
+#new-task:hover,
+#new-note:hover {
+  background-color: #2d3e40;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.19);
+}
+
+/* New Task Modal*/
+body.modal-open > .content-wrapper {
   overflow: hidden;
   filter: blur(2px);
 }
-*/
 
 .modal {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
   display: none;
   position: fixed;
   z-index: 1;
@@ -99,12 +130,130 @@ header {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.6);
 }
+fieldset {
+  border: none;
+}
+#task-name {
+  width: 80%;
+}
+#task-name:hover,
+#due-date:hover {
+  border: 2px solid #387373;
+}
+
+#task-name,
+#due-date {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+#form-legend {
+  font-size: 1.5em;
+  text-decoration: underline;
+}
+
+.task-name-div {
+  margin: 20px 0;
+}
 
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  filter: none;
+  width: 40%;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.19);
+}
+
+.close-btn {
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.close-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: #888;
+}
+
+.close-btn:hover svg {
+  fill: #000;
+}
+
+.priority-p {
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.radio-container {
+  display: flex;
+  justify-content: center;
+}
+
+.radio-label {
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.radio-label:hover {
+  background-color: var(--radio-background-color);
+  border-color: var(--radio-border-color);
+}
+
+.radio-input {
+  display: none;
+}
+
+#low-priority + .radio-label {
+  color: green;
+}
+
+#medium-priority + .radio-label {
+  color: orange;
+}
+
+#high-priority + .radio-label {
+  color: red;
+}
+
+.radio-input:checked + .radio-label {
+  background-color: var(--radio-background-color);
+  border-color: var(--radio-border-color);
+  font-weight: bolder;
+}
+
+#modal-form button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+#modal-form button[type='submit'] {
+  background-color: #4caf50;
+  color: white;
+}
+
+#modal-form button[type='submit']:hover {
+  background-color: #45a049;
+}
+
+#modal-form #cancelBtn {
+  background-color: #f44336;
+  color: white;
+}
+
+#modal-form #cancelBtn:hover {
+  background-color: #e53935;
 }

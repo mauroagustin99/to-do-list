@@ -21,6 +21,7 @@
   overflow: hidden;
   transition: all 0.2s;
   cursor: pointer;
+  height: 5em;
 }
 
 #add-project span {
@@ -52,16 +53,38 @@
 
 li {
   border-radius: 10px;
-
   list-style: none;
   cursor: pointer;
-  margin: 3px;
+  margin-bottom: 7px;
+  padding: 13px;
+  background-color: #93bfb7;
+  color: white;
+  transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+li > input {
+  background-color: #93bfb7;
+  color: white;
+  border: none;
   padding: 10px;
+  width: 100%; /* Asegura que el input ocupe todo el ancho del li */
+  box-sizing: border-box; /* Incluye el padding en el ancho total */
+  border-radius: 10px; /* Igual que el li */
+  transition: background-color 0.3s; /* Transición suave */
+}
+
+li > input:focus {
+  outline: none;
+  /* Cambia el fondo al enfocarse */
 }
 
 li:hover {
   background-color: #2d3e40;
   color: white;
+}
+
+li > input:hover {
+  background-color: #2d3e40; /* Mismo color que el li al pasar el ratón */
 }
 
 .current-project {

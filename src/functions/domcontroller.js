@@ -34,6 +34,14 @@ export default function printTask(name, date, priority, state, taskIndex) {
   <option value="Medium">Medium</option>
   <option value="Low">Low</option>
 `;
+
+  if (priority === 'High') {
+    taskpriority.classList.add('high-priority');
+  } else if (priority === 'Medium') {
+    taskpriority.classList.add('medium-priority');
+  } else if (priority === 'Low') {
+    taskpriority.classList.add('low-priority');
+  }
   taskpriority.value = priority;
 
   const taskdeletebtn = document.createElement('button');
@@ -159,26 +167,39 @@ function makeModal() {
   modalContent.classList.add('modal-content');
   modal.appendChild(modalContent);
   modalContent.innerHTML = `
-  <span class="close-btn">&times;</span>
+  <button class="close-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>close-circle-outline</title><path d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M14.59,8L12,10.59L9.41,8L8,9.41L10.59,12L8,14.59L9.41,16L12,13.41L14.59,16L16,14.59L13.41,12L16,9.41L14.59,8Z" /></svg></button>
         <form id="modal-form">
         <fieldset>
         <legend id="form-legend">Add new task:</legend>
-          <label for="task-name">Task:</label>
-          <input type="text" id="task-name" placeholder="Task Name" required>
 
+
+          <div class="task-name-div">
+          <label for="task-name">Task:</label>
+          <input type="text" id="task-name" placeholder="Task Name" required><br>
+          </div>
+
+          <div class="task-date-div">
           <label for="due-date">Due Date:</label>
           <input type="date" id="due-date" name="due-date" required />
+          </div>
+          
 
           <p class="priority-p">Priority:</p>
-          <input type="radio" id="low-priority" name="options" value="Low" required />
-          <label for="option1">Low</label><br />
-          <input type="radio" id="medium-priority" name="options" value="Medium" />
-          <label for="option2">Medium</label><br />
-          <input type="radio" id="high-priority" name="options" value="High" />
-          <label for="option3">High</label><br />
+          <div class="radio-container">
+          <input type="radio" id="low-priority" name="options" value="Low" class="radio-input" required />
+          <label for="low-priority" class="radio-label" data-color="yellow">Low</label>
+          <input type="radio" id="medium-priority" name="options" value="Medium" class="radio-input" required/>
+          <label for="medium-priority" class="radio-label" data-color="orange">Medium</label>
+          <input type="radio" id="high-priority" name="options" value="High" class="radio-input" required/>
+          <label for="high-priority" class="radio-label" data-color="red">High</label><br />
+          </div>
 
+
+          <div class= "submit-btn">
           <button type="submit">Guardar</button>
           <button type="button" id="cancelBtn">Cancelar</button>
+          </div>
+
           </fieldset>
         </form>
   `;
