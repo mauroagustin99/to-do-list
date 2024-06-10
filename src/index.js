@@ -19,15 +19,18 @@ import {
   loadNotesFromLocalStorage,
 } from './functions/local_storage/loadLocalStorage.js';
 import { initializeGeneralProject } from './functions/projectcontroller.js';
-import NewNote from './functions/notecontroller.js';
+import NewNote, { initializeNotes } from './functions/notecontroller.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  //Load Projects from the local storage
-  loadProjectsFromLocalStorage();
-  loadNotesFromLocalStorage();
-
   // Initialize "General" project if it doesn't exist
   initializeGeneralProject();
+
+  //Load Projects from the local storage
+  loadProjectsFromLocalStorage();
+
+  loadNotesFromLocalStorage();
+  // Initialize first note
+  initializeNotes();
 
   // Set "General" as the current project each time DOMContent is loaded
   initializeProjectSelection();

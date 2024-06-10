@@ -76,3 +76,15 @@ export function printNote(id, title, description, color) {
   note.appendChild(noteColor);
   notesContainer.appendChild(note);
 }
+
+export function initializeNotes() {
+  const isFirstTime = localStorage.getItem('isFirstTime'); // Checking if its your first time accessing to To Do!!
+  if (!isFirstTime) {
+    const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+    if (!storedNotes.length) {
+      // If storedNotes is empty
+      newNote();
+      localStorage.setItem('isFirstTime', true);
+    }
+  }
+}

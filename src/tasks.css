@@ -84,18 +84,7 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-}
-
-.task input[type='date'] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 20px;
+  width: 18px;
   height: 30px;
   cursor: pointer;
   border: none;

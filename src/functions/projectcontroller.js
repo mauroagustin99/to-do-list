@@ -1,5 +1,7 @@
 import { Project } from './projects.js';
 import { loadProjectsFromLocalStorage } from './local_storage/loadLocalStorage.js';
+import { Task } from './tasks.js';
+import { saveTaskToCurrentProject } from './local_storage/saveToLocalStorage.js';
 
 let currentProjectName = null;
 let projects = [];
@@ -26,7 +28,11 @@ export function initializeGeneralProject() {
   );
 
   if (!generalProject) {
-    const newGeneralProject = new Project('General');
+    const myTask = [
+      new Task('Clean my bedroom', '2026-06-11', 'Low', false),
+      new Task('Study maths', '2024-05-11', 'High', true),
+    ];
+    const newGeneralProject = new Project('General', myTask);
     storedProjects.push(newGeneralProject);
     localStorage.setItem('projects', JSON.stringify(storedProjects));
     projects = storedProjects;
