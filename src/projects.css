@@ -1,12 +1,10 @@
 #navigator {
   background-color: #97a6a0;
-  display: grid;
-  grid-template-rows: 1fr 5fr;
   padding: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-/*ADD PROJECT .add-project*/
+/*Add project button*/
 #add-project {
   font-family: inherit;
   font-size: 1em;
@@ -21,6 +19,7 @@
   overflow: hidden;
   transition: all 0.2s;
   cursor: pointer;
+  width: 100%;
   height: 5em;
 }
 
@@ -50,6 +49,8 @@
 #add-project:active {
   transform: scale(0.95);
 }
+
+/*Projects container styles*/
 
 li {
   border-radius: 10px;

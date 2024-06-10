@@ -31,14 +31,16 @@ body {
   display: block;
   font-weight: 100;
   font-style: italic;
-  font-size: 2.5em;
+  font-size: 2.3em;
   color: white;
+  text-align: center;
 }
 .author {
-  font-size: 0.5em;
+  font-size: 0.7em;
   justify-self: end;
   align-self: end;
   color: white;
+  padding: 5px;
 }
 
 .github-link {
@@ -46,14 +48,12 @@ body {
   color: white;
   font-weight: bold;
   display: inline-block;
-  padding: 10px 15px;
-
   border-radius: 5px;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.5s, color 0.3s;
 }
 
 .github-link:hover {
-  background-color: #0366d6;
+  background-color: #2d3e40;
   color: white;
 }
 /* Color Theme Swatches in Hex */
@@ -89,6 +89,7 @@ header {
 
 #new-task,
 #new-note {
+  align-self: end;
   font-family: inherit;
   font-size: 1em;
   background-color: #93bfb7;
@@ -103,6 +104,7 @@ header {
   transition: all 0.2s;
   cursor: pointer;
   height: 5em;
+  margin-bottom: 15px;
 }
 
 #new-task:hover,

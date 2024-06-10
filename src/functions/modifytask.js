@@ -75,6 +75,14 @@ export default function modifyTask() {
         );
         if (projectIndex !== -1) {
           projects[projectIndex].tasks[index].priority = taskPriority.value;
+
+          // remove current priority class
+          taskPriority.classList.remove(
+            'high-priority',
+            'medium-priority',
+            'low-priority'
+          );
+
           if (taskPriority.value === 'High') {
             taskPriority.classList.add('high-priority');
           } else if (taskPriority.value === 'Medium') {

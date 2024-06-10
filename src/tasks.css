@@ -9,7 +9,7 @@
   display: grid;
   grid-template-columns: 1fr 7fr repeat(3, 1fr);
   border-radius: 8px;
-  border: 2px solid #2d3e40;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   background-color: #e4f2e7;
   align-items: center;
   height: 3em;
@@ -23,7 +23,7 @@
   width: 30px;
   aspect-ratio: 1;
   border-radius: 8px;
-  border: 2px solid black;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   position: relative;
   transition: all 0.2s ease-in-out;
   background-color: white;
@@ -103,27 +103,29 @@
   -moz-appearance: none; /* Firefox */
   appearance: none;
 
-  border: 2px solid #2d3e40;
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   text-align: center;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   background-size: 10px;
+  padding: 3px;
 }
 
 .priority-input {
-  width: 148px; /* Ajuste para coincidir con el select */
+  width: 148px;
   border: 1px solid #ccc;
 }
 
 .high-priority {
-  background-color: #ff9999; /* Rojo claro */
+  background-color: #ff9999; /* Light red */
 }
 
 .medium-priority {
-  background-color: #ffcc99; /* Naranja claro */
+  background-color: #ffcc99; /* Light orange */
 }
 
 .low-priority {
-  background-color: #99ff99; /* Verde claro */
+  background-color: #99ff99; /* Light green */
 }
