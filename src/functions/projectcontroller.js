@@ -7,7 +7,6 @@ projects = loadProjectsFromLocalStorage();
 
 export function setCurrentProject(name) {
   currentProjectName = name;
-  console.log(currentProjectName);
 }
 
 export function getCurrentProject() {

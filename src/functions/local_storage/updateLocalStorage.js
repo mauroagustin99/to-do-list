@@ -49,6 +49,17 @@ export function updateTaskInProject(projectIndex, taskIndex, updatedTask) {
     projects[projectIndex].tasks[taskIndex] = updatedTask;
     localStorage.setItem('projects', JSON.stringify(projects));
   } else {
-    console.error('El proyecto no se encontró en localStorage');
+    console.error('Cannot find the project');
+  }
+}
+
+export function updateNoteInLocalStorage(id, title, description, color) {
+  const notes = JSON.parse(localStorage.getItem('notes')) || [];
+  const noteIndex = notes.findIndex((note) => note.id === id);
+  if (noteIndex > -1) {
+    notes[noteIndex].title = title;
+    notes[noteIndex].description = description;
+    notes[noteIndex].color = color;
+    localStorage.setItem('notes', JSON.stringify(notes));
   }
 }

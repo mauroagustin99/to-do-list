@@ -1,0 +1,23 @@
+.note {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.delete-note {
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.delete-note svg {
+  width: 20px;
+  height: 20px;
+  fill: #888;
+}
+
+.delete-note:hover svg {
+  fill: #000;
+}

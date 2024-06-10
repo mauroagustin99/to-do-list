@@ -43,7 +43,8 @@ export function loadProjectsFromLocalStorage() {
 
 export function loadNotesFromLocalStorage() {
   const notes = JSON.parse(localStorage.getItem('notes')) || [];
+
   notes.forEach((note) => {
-    printNote(note.title, note.description, note.color);
+    printNote(note.id, note.title, note.description, note.color);
   });
 }

@@ -28,3 +28,9 @@ export function deleteTaskFromProject(taskIndex) {
     }
   }
 }
+
+export function deleteNoteFromLocalStorage(id) {
+  let storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+  storedNotes = storedNotes.filter((note) => note.id !== id);
+  localStorage.setItem('notes', JSON.stringify(storedNotes));
+}
