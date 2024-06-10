@@ -13,7 +13,7 @@ body {
   background-color: #fff;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 2fr 10fr;
+  grid-template-rows: 1fr 10fr;
 }
 
 .logo {

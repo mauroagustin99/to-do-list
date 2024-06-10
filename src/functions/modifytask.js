@@ -1,3 +1,5 @@
+import { differenceInDays, parseISO } from 'date-fns';
+import { clearTaskList } from './domcontroller.js';
 import { updateTaskInProject } from './local_storage/updateLocalStorage.js';
 import { getCurrentProject } from './projectcontroller.js';
 
@@ -48,7 +50,7 @@ export default function modifyTask() {
       }
     });
 
-    taskDate.addEventListener('input', () => {
+    taskDate.addEventListener('change', () => {
       let projects = JSON.parse(localStorage.getItem('projects')) || [];
       const currentProject = getCurrentProject();
       if (currentProject) {
@@ -57,6 +59,23 @@ export default function modifyTask() {
         );
         if (projectIndex !== -1) {
           projects[projectIndex].tasks[index].dueDate = taskDate.value;
+
+          const dueDateObj = parseISO(taskDate.value);
+          const currentDate = new Date();
+          const daysRemaining = differenceInDays(dueDateObj, currentDate);
+
+          let timeRemaining;
+
+          if (daysRemaining > 0) {
+            timeRemaining = `due in ${daysRemaining} days`;
+          } else if (daysRemaining === 0) {
+            timeRemaining = 'due today';
+          } else {
+            timeRemaining = `was due ${Math.abs(daysRemaining)} days ago`;
+          }
+          const dueDate = document.querySelector('.due');
+          dueDate.textContent = timeRemaining;
+
           updateTaskInProject(
             projectIndex,
             index,

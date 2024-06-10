@@ -5,6 +5,14 @@ import {
   deleteProjectFromLocalStorage,
   deleteTaskFromProject,
 } from './local_storage/deleteFromLocalStorage.js';
+import {
+  differenceInDays,
+  format,
+  formatDistanceToNow,
+  isToday,
+  isTomorrow,
+  parseISO,
+} from 'date-fns';
 
 let modal; //Creating modal to just making it once per session
 
@@ -21,11 +29,30 @@ export default function printTask(name, date, priority, state, taskIndex) {
 
   const taskname = document.createElement('p');
   taskname.textContent = name;
+  taskname.classList.add('task-name');
   taskname.setAttribute('contenteditable', 'true');
 
   const taskdate = document.createElement('input');
   taskdate.type = 'date';
   taskdate.value = date;
+
+  //Date working with date-fns
+  const dueDateObj = parseISO(taskdate.value);
+  const currentDate = new Date();
+  const daysRemaining = differenceInDays(dueDateObj, currentDate);
+
+  let timeRemaining;
+
+  if (daysRemaining > 0) {
+    timeRemaining = `due in ${daysRemaining} days`;
+  } else if (daysRemaining === 0) {
+    timeRemaining = 'due today';
+  } else {
+    timeRemaining = `was due ${Math.abs(daysRemaining)} days ago`;
+  }
+  const dueDate = document.createElement('p');
+  dueDate.classList.add('due');
+  dueDate.textContent = timeRemaining;
 
   const taskpriority = document.createElement('select');
   taskpriority.classList.add('priority-select');
@@ -60,6 +87,7 @@ export default function printTask(name, date, priority, state, taskIndex) {
 
   task.appendChild(taskstate);
   task.appendChild(taskname);
+  task.appendChild(dueDate);
   task.appendChild(taskdate);
   task.appendChild(taskpriority);
   task.appendChild(taskdeletebtn);
@@ -258,7 +286,7 @@ export function clearProjectList() {
   }
 }
 
-function clearTaskList() {
+export function clearTaskList() {
   const taskList = document.getElementById('tasks-container');
   taskList.innerHTML = '';
 }
